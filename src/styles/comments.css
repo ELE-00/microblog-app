@@ -1,0 +1,48 @@
+
+
+.CfeedItemWrapper{
+    display: flex;
+    min-height: 8vh;
+    gap: 20px;
+    border-top: 1px solid #00547B;
+    border-bottom: 1px solid #00547B;
+    padding: 10px;
+    justify-content: space-between;
+    background-color: rgb(0, 26, 44);
+}
+
+.CfeedItemContentWrapper{
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+
+
+}
+
+.CprofilePic{
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+
+.CdeleteBtn{
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+}
+
+.CcontentHeader{
+    display: flex;
+    gap: 10px;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+
+.Ctime{
+    color: rgb(168, 168, 168);
+    font-size: 0.8rem;
+
+}
+

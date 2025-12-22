@@ -1,31 +1,28 @@
-
-
-.postForm{
+.commentForm{
     display: flex;
-    flex-direction: column;
-    min-height: 15vh;
+    min-height: 8vh;
     border: 1px solid #00547B;
     background-color: rgb(0, 26, 44);
 }
 
 
-.postFormInput{
+.commentFormInput{
     width: 100%;
     background-color: rgb(0, 26, 44);
     border: none;
     padding: 10px;
-    min-height: 10vh;
-    height: auto;
 }
 
 
-.postFormBtn{
+.commentFormBtn{
     background-color: #00547B;
     border: none;
-    border-radius: 5px;
-    width: 10vw;
-    height: 2vw;
     
 }
 
-
+.commentsHeading{
+    margin-top: 5px;;
+    padding: 10px;
+    color: #8f8f8f;
+    font-weight: bold;
+}

@@ -1,7 +1,10 @@
 
 //AuthContext.jsx
 import React, {createContext, useContext, useState, useEffect} from "react";
+import { socket } from "../socket.js";
+
 const AuthContext = createContext();
+
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(() => {

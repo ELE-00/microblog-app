@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import Feed from './pages/Feed.jsx'
 import Profile from './pages/Profile.jsx'
+import PostDetails from './pages/PostDetails.jsx';
 
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
         ),
         children: [
             {index: true, element: <Feed />},
-            {path: "profile", element: <Profile />}
+            {path: "profile/:id", element: <Profile />},
+            {path: "post/:id", element: <PostDetails />}
 
         ]
     }

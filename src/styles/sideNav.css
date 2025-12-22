@@ -1,0 +1,66 @@
+
+.sideNavWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.sideNavLinks{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    padding-left: 25px;
+
+    
+}
+
+.linkContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.linkIcon{
+    height: 30px;
+}
+
+
+.linkText{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+
+}
+
+.linkText:visited{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+
+}
+
+/* --------------- FOOTER --------------- */
+
+.footerContainer{
+    display: flex;
+    gap: 10px;
+    padding-left: 25px;
+    padding-bottom: 20px; 
+}
+
+.profilePic{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.contentContainer {
+    width: 100%;
+    padding: 5px;
+}
+
+.SNusername{
+    color: rgb(168, 168, 168);
+    font-size: 0.8rem;
+}
