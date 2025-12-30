@@ -41,7 +41,7 @@ const Login = () => {
             navigate("/");
         } catch (err) {
             console.log(err)
-            alert("Login failed. Please try again.")
+            alert("Username or Password is incorrect. Please try again.")
         }
     }
 

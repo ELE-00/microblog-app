@@ -1,0 +1,21 @@
+
+.followDialogWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.dialogCloseBtn{
+   height: 25px; 
+   background-color: #00547B;
+   border: none;
+   border-radius: 5px;
+}
+
+.dialogUserList{
+    font-size: 0.9rem;
+    color: rgb(168, 168, 168);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

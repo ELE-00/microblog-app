@@ -3,17 +3,17 @@
 import React, { Children } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 
-
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = () => {
     const { user } = useAuth();
 
     if (!user) {
         return <Navigate to="/login" replace/>
     }
 
-    return children;
+    return <Outlet />;
     }
 
 export default ProtectedRoute;

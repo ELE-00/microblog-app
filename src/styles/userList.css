@@ -1,0 +1,21 @@
+
+
+.userListContainer{
+    padding: 10px;
+}
+
+.searchBarContainer{
+    padding: 10px;
+}
+
+
+
+.userSearchBar{
+    width: 100%;
+    background-color: rgb(0, 41, 71);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    height: auto;
+
+}

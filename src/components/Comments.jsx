@@ -4,20 +4,41 @@ import '../styles/comments.css'
 import profilePic from '../assets/profilepic.jpg';
 import deleteIcon from '../assets/deleteicon.png';
 import { useAuth } from '../context/AuthContext';
-
+import { useNavigate } from 'react-router-dom';
 
 const Comments = ({item, handleDeleteComment}) => {
-    const {user} = useAuth();
+    const navigate = useNavigate();
+    const {user, currentUserProfile} = useAuth();
     const date = new Date(item.createdAt);
     const timeString = date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
 
+    console.log(item)
+
+    const isMe = item.user.id === user?.id;
+
+    const profileImage =
+        isMe
+            ? currentUserProfile?.profile?.profilePic
+            : item.user.profile?.profilePic;
+
+
+    const goToProfile = () => {
+        navigate(`/profile/${item.user.id}`)
+    }
 
 return (
     <div className="CfeedItemWrapper">
 
         <div className="CfeedItemContentWrapper">
             <div>
-                <img className="CprofilePic" src={profilePic} alt="profilepic.jpg"></img> 
+
+                <img
+                    className="CprofilePic"
+                    src={profileImage || profilePic}
+                    alt="profilePic"
+                    onClick={goToProfile}
+                />
+
             </div>
 
             <div className="Ccontent">

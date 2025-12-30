@@ -20,7 +20,7 @@
     flex-direction: column;
     gap: 10px;
     background: 
-    linear-gradient(#3F3051,#281F33) padding-box,
+    linear-gradient(#00547B,rgb(0, 19, 33)) padding-box,
     linear-gradient(to top, #3F3051 30%, #281F33 100%) border-box;
     padding: 2%;
     width: 30vw;
@@ -38,7 +38,7 @@
 }
 
 .loginInput{    
-    background-color: #bf8eff21;
+    background-color: rgb(0, 19, 33);
     border: none;
     height: 30px;
     border-radius: 10px;
@@ -49,6 +49,6 @@
     margin-top: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #bf8effdf;
+    background-color: #00547B;;
     height: 3vh;
 }

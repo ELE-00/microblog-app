@@ -20,15 +20,17 @@
     flex-direction: column;
     gap: 10px;
     background: 
-    linear-gradient(#412a5e,#18131e) padding-box,
+    linear-gradient(#00547B,rgb(0, 19, 33)) padding-box,
     linear-gradient(to top, #3F3051 30%, #281F33 100%) border-box;
     padding: 2%;
     width: 30vw;
     border-radius: 10px;
-    border: 1px solid #d4b7fadf;
-    box-shadow: 0px 0px 15px 2px #8e37ff;
+    border: 1px solid #00547B;;
+    box-shadow: 0px 0px 15px 2px #00547B;;
 
 }
+
+
 
 .signupForm{
     display: flex;
@@ -40,7 +42,7 @@
 }
 
 .signupInput{    
-    background-color: #bf8eff21;
+    background-color: rgb(0, 19, 33);
     border: none;
     height: 30px;
     border-radius: 10px;
@@ -51,6 +53,6 @@
     margin-top: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #bf8effdf;
+    background-color: #00547B;;
     height: 3vh;
 }

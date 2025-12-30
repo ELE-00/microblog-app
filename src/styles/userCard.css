@@ -1,0 +1,52 @@
+
+.userCardWrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #00547B;
+
+}
+
+
+.UCProfilepic{
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    image-rendering: smooth;
+    border-radius: 50%;
+    border: 4px solid rgb(0, 19, 33);
+
+}
+
+.UCUserInfoWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-right: 20px;
+
+}
+.UCUserInfo{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.UCUsername{
+    font-size: 1.1rem;
+    color: white;
+}
+
+
+.UCname{
+    font-size: 0.9rem;
+    color: rgb(168, 168, 168);
+}
+
+.removeBtn{
+   height: 25px; 
+   background-color: #00547B;
+   border: none;
+   border-radius: 5px;
+}
+

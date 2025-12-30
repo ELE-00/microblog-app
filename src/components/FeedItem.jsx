@@ -1,3 +1,5 @@
+//feedItem.jsx
+
 import React, {useState, useEffect} from 'react';
 import '../styles/feedItem.css'
 import { useAuth } from '../context/AuthContext';
@@ -14,8 +16,9 @@ import { unlikePost } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 
 const FeedItem = ( {item, handleDeletePost} ) => {
+
     const navigate = useNavigate();
-    const {user} = useAuth();
+    const {user, currentUserProfile } = useAuth();
 
     const [liked, setLiked] = useState(false);
 
@@ -58,13 +61,51 @@ const FeedItem = ( {item, handleDeletePost} ) => {
         navigate(`/profile/${item.author.id}`)
     }
 
+    const isMe = item.author.id === user?.id;
 
+    const profileImage =
+        isMe
+            ? currentUserProfile?.profile?.profilePic
+            : item.author.profile?.profilePic;
+
+
+
+    async function handlePostImgUpload(e) {
+        const file = e.target.files[0];
+
+        if(!file) return
+
+            const formDataImage = new FormData();
+            formDataImage.append("bannerpic", file); 
+
+        
+        try {
+            const res = await uploadBannerImage(formDataImage)
+            console.log("Banner image uploaded:", res.data);
+
+            updateBannerPic(res.data.bannerPic)
+    
+        } catch(err) {
+            console.log(err)
+        }
+
+    }       
+
+
+    // console.log(item)
 
     return (
         <div className="feedItemWrapper">
             
             <div>
-                <img className="FIprofilePic" src={profilePic} alt="profilepic.jpg" onClick={goToProfile}></img> 
+
+            <img
+                className="FIprofilePic"
+                src={profileImage || profilePic}
+                alt="profilePic"
+                onClick={goToProfile}
+            />
+
             </div>
 
             <div className="FIcontent">
@@ -76,6 +117,7 @@ const FeedItem = ( {item, handleDeletePost} ) => {
 
                 <div> 
                     <p> {item.content} </p> 
+                    <img className="postImage" src={item?.image} />
                 </div>
 
                 <div className="FIiconsWrapper">

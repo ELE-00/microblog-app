@@ -64,6 +64,8 @@ const PostDetails = () => {
         try{
             const res = await createComment(id, formData)
             setComments(prev => [res.data, ...prev]);
+            setFormData({ content: "" });
+
         } catch(err) {
             console.log(err)
         }

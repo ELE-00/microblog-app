@@ -11,9 +11,13 @@ import Signup from './pages/Signup.jsx'
 import Feed from './pages/Feed.jsx'
 import Profile from './pages/Profile.jsx'
 import PostDetails from './pages/PostDetails.jsx';
+import UserList from './pages/UserList.jsx';
+import NotFound from './pages/NotFound.jsx';
+
 
 import { AuthProvider } from './context/AuthContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+
 
 const router = createBrowserRouter([
     //Public routes
@@ -24,16 +28,17 @@ const router = createBrowserRouter([
     //Protected app
     {
         path: "/",
-        element: (
-        <ProtectedRoute> 
-            <AppLayout /> 
-        </ProtectedRoute>
-        ),
+        element: <ProtectedRoute />,
         children: [
-            {index: true, element: <Feed />},
-            {path: "profile/:id", element: <Profile />},
-            {path: "post/:id", element: <PostDetails />}
+            { element: <AppLayout />, children: [
+                { index: true, element: <Feed /> },
+                { path: "profile/:id", element: <Profile /> },
+                { path: "post/:id", element: <PostDetails /> },
+                { path: "AddUser", element: <UserList /> },
 
+                // Catch-all 404 route
+                { path: "*", element: <NotFound /> }
+            ]}
         ]
     }
 ]);

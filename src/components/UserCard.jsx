@@ -1,31 +1,37 @@
-//Chatcard.jsx
-import React from 'react';
-import '../styles/chatCard.css'
-import profilePicMock from "../assets/profilepic.jpg";
+//UserCard.jsx
+import React, {useState} from 'react';
+import '../styles/userCard.css'
+import profilePic from '../assets/profilepic.jpg';
 
+function UserCard({user, handleOpenProfile}) {
 
-
-
-
-function UserCard({item, onClick}) {
-
-    console.log(item)
+    console.log(user)
 
     return  (
-        <div className="chatCardWrapper" onClick={onClick}>
-            <div className="profilPicSection">
-                <img 
-                    className="msgProfilPic" 
-                    src={item.profilepic || profilePicMock} 
-                    alt="profilepic" 
-                />
+        <div className="userCardWrapper" onClick={() => handleOpenProfile(user.id)}>
+
+            <div>
+                {user.profile.profilePic? (
+                    <img className="UCProfilepic" src={user.profile.profilePic} alt="profilePic"></img>
+                ): (
+                    <img className="UCProfilepic" src={profilePic} alt="profilePic.jpg" ></img>     
+                )}
+
             </div>
 
-            <div className="infoSection" >
-                {item.name}
-                
+            <div className="UCUserInfoWrapper">
+                <div className="UCUserInfo">
+                    <div className="UCUsername">
+                        {user.username}
+                    </div>
+
+                    <div className="UCname">
+                        {user.profile.name}
+                    </div>
+                </div>
+
             </div>
-            
+
         </div>
     )
 };

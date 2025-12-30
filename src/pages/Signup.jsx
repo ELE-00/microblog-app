@@ -2,8 +2,12 @@
 import React, {useState} from 'react';
 import '../styles/signup.css'
 import {signup as signupAPI} from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         username: "",
         name: "",
@@ -14,7 +18,6 @@ const Signup = () => {
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value });
     }
-
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -29,9 +32,10 @@ const Signup = () => {
 
             console.log(res.data)
             alert("Signup successful! You can now login.");
+            navigate(`/login`);
 
         } catch (err) {
-            console.log("Failed to create user")
+            alert("Username already exists");
             console.log(err)
         }
 
