@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import profilePic from '../assets/profilepic.jpg';
 import commentIcon from '../assets/commentIcon.png';
 import heartIcon from '../assets/heartIcon.png';
-import redHeartIcon from '../assets/redheartIcon.png';
+import redHeartIcon from '../assets/redhearticon.png';
 import deleteIcon from '../assets/deleteicon.png';
 
 import { postLiked } from '../api/auth';
