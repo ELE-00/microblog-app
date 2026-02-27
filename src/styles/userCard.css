@@ -3,8 +3,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid #00547B;
-
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    padding: 5px;
 }
 
 
@@ -14,8 +17,8 @@
     object-fit: cover;
     image-rendering: smooth;
     border-radius: 50%;
-    border: 4px solid rgb(0, 19, 33);
-
+    border: 4px solid var(--bg-secondary);
+    cursor: pointer;
 }
 
 .UCUserInfoWrapper{
@@ -34,19 +37,21 @@
 
 .UCUsername{
     font-size: 1.1rem;
-    color: white;
+    color: var(--text-primary);
+    cursor: pointer;
 }
 
 
 .UCname{
     font-size: 0.9rem;
-    color: rgb(168, 168, 168);
+    color: var(--text-secondary);
 }
 
 .removeBtn{
-   height: 25px; 
-   background-color: #00547B;
+   height: 25px;
+    background-color: var(--bg-btn);
    border: none;
    border-radius: 5px;
+   cursor: pointer;
 }
 

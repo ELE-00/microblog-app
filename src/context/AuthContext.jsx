@@ -7,15 +7,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(() => {
-        // DEV MODE AUTO LOGIN
-        if (import.meta.env.DEV) {
-            return {
-                id: 17,
-                username: "ele",
-                token: "dev-token",
-            };
-        }
-
         const savedUser = localStorage.getItem("user");
         return savedUser ? JSON.parse(savedUser) : null;
     });

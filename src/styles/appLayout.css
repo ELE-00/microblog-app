@@ -1,31 +1,46 @@
 
 .appLayout{
     display: flex;
-    height: 100vh;    
-    overflow: hidden; 
-    
+    height: 100vh;
+    overflow: hidden;
 }
 
 
 .sideNavSection{
-    width: 20vw;
+    min-width: 10vw;
+    flex-shrink: 0;
 }
 
 
 .contentSection{
-    border: 1px solid #00547B;
     width: 100%;
-    overflow-y: auto; 
-
+    overflow-y: auto;
 }
 
-
-.backBtn{
-    background-color: rgba(255, 0, 0, 0);
-    border: none;
+/* ── Tablet (768–1023px): icon-only sidebar ── */
+@media (max-width: 1023px) {
+    .sideNavSection {
+        width: 70px;
+    }
 }
 
-.backBtnIcon{
-    height: 35px;
-    width: 35px;
+/* ── Mobile (<768px): bottom navigation bar ── */
+@media (max-width: 767px) {
+    .appLayout {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .sideNavSection {
+        width: 100%;
+        height: 60px;
+        flex-shrink: 0;
+        order: 2;
+    }
+
+    .contentSection {
+        order: 1;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
 }

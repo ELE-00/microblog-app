@@ -10,22 +10,26 @@ const Feed = () => {
   const [posts, setPosts] = useState([]);
   const [formData, setFormData] = useState({ content: "" });
   const [selectedImage, setSelectedImage] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState(null);
 
-  const {updatePosts} = useAuth();
+  const { updatePosts } = useAuth();
 
-
-  // Fetch posts
+  // Fetch posts on mount
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getPosts();
-        setPosts(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
+    setLoading(true);
+    setError(null);
+    getPosts(1)
+      .then((res) => {
+        setPosts(res.data.posts);
+        setHasMore(res.data.hasMore);
+        setPage(1);
+      })
+      .catch(() => setError("Failed to load posts. Please try again."))
+      .finally(() => setLoading(false));
   }, []);
 
   // Input change
@@ -33,18 +37,33 @@ const Feed = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-    // Image selection
-    const handleImageSelect = (e) => {
+  // Image selection
+  const handleImageSelect = (e) => {
     const file = e.target.files[0];
     if (file) setSelectedImage(file);
-    };
+  };
 
-    // Remove selected image (optional)
-    const handleRemoveImage = () => {
+  // Remove selected image
+  const handleRemoveImage = () => {
     setSelectedImage(null);
     document.getElementById("postImgInput").value = null;
-    };
+  };
 
+  // Load more posts
+  const handleLoadMore = async () => {
+    const nextPage = page + 1;
+    setLoadingMore(true);
+    try {
+      const res = await getPosts(nextPage);
+      setPosts((prev) => [...prev, ...res.data.posts]);
+      setHasMore(res.data.hasMore);
+      setPage(nextPage);
+    } catch (err) {
+      setError("Failed to load more posts.");
+    } finally {
+      setLoadingMore(false);
+    }
+  };
 
   // Create post
   const handleCreatePost = async (e) => {
@@ -56,11 +75,10 @@ const Feed = () => {
         data.append("postimage", selectedImage);
       }
 
-      const res = await createPost(data); // backend expects multipart/form-data
+      const res = await createPost(data);
       setPosts((prev) => [res.data, ...prev]);
       updatePosts({ post: res.data });
 
-      // Reset form
       setFormData({ content: "" });
       setSelectedImage(null);
       document.getElementById("postImgInput").value = null;
@@ -71,8 +89,6 @@ const Feed = () => {
 
   // Delete post
   const handleDeletePost = async (postId) => {
-    console.log("received post id:", postId)
-
     try {
       await deletePostById(postId);
       updatePosts({ delete: true, id: postId });
@@ -85,50 +101,47 @@ const Feed = () => {
   return (
     <div className="bodyWrapper">
       <div className="postFormWrapper">
-            <form className="postForm" onSubmit={handleCreatePost}>
-            <input
-                className="postFormInput"
-                type="text"
-                placeholder="What's happening?"
-                name="content"
-                value={formData.content}
-                onChange={handleChange}
-                required
-            />
+        <form className="postForm" onSubmit={handleCreatePost}>
+          <input
+            className="postFormInput"
+            type="text"
+            placeholder="What's happening?"
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
+            required
+          />
 
-            <input
-                type="file"
-                id="postImgInput"
-                name="postimage"
-                style={{ display: "none" }}
-                onChange={handleImageSelect}
-            />
-            <img
-                className="imgUploadBtn"
-                src={imageuploadicon}
-                alt="upload"
-                onClick={() => document.getElementById("postImgInput").click()}
-            />
+          <input
+            type="file"
+            id="postImgInput"
+            name="postimage"
+            style={{ display: "none" }}
+            onChange={handleImageSelect}
+          />
+          <img
+            className="imgUploadBtn"
+            src={imageuploadicon}
+            alt="upload"
+            onClick={() => document.getElementById("postImgInput").click()}
+          />
 
-            {/* Preview selected image */}
-            {selectedImage && (
-                <div className="imagePreviewWrapper">
-                <img
-                    src={URL.createObjectURL(selectedImage)}
-                    alt="preview"
-                    className="postImagePreveiw"
-                />
-                <button
-                    type="button"
-                    className="removeImageBtn"
-                    onClick={handleRemoveImage}
-                >
-                    Remove
-                </button>
-                </div>
-            )}
-
-
+          {selectedImage && (
+            <div className="imagePreviewWrapper">
+              <img
+                src={URL.createObjectURL(selectedImage)}
+                alt="preview"
+                className="postImagePreveiw"
+              />
+              <button
+                type="button"
+                className="removeImageBtn"
+                onClick={handleRemoveImage}
+              >
+                Remove
+              </button>
+            </div>
+          )}
 
           <button className="postFormBtn" type="submit">
             Send
@@ -137,13 +150,58 @@ const Feed = () => {
       </div>
 
       <div className="mainContent">
-        {posts.map((post) => (
-          <FeedItem
-            key={post.id}
-            item={post}
-            handleDeletePost={handleDeletePost}
-          />
-        ))}
+        {loading ? (
+          <div className="spinnerWrapper">
+            <div className="spinner" />
+          </div>
+        ) : error ? (
+          <div className="errorState">
+            <p>{error}</p>
+            <button
+              className="retryBtn"
+              onClick={() => {
+                setError(null);
+                setLoading(true);
+                getPosts(1)
+                  .then((res) => {
+                    setPosts(res.data.posts);
+                    setHasMore(res.data.hasMore);
+                    setPage(1);
+                  })
+                  .catch(() => setError("Failed to load posts. Please try again."))
+                  .finally(() => setLoading(false));
+              }}
+            >
+              Retry
+            </button>
+          </div>
+        ) : (
+          <>
+            {posts.map((post) => (
+              <FeedItem
+                key={post.id}
+                item={post}
+                handleDeletePost={handleDeletePost}
+              />
+            ))}
+
+            {hasMore ? (
+              <div className="loadMoreWrapper">
+                <button
+                  className="loadMoreBtn"
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                >
+                  {loadingMore ? "Loading..." : "Load more"}
+                </button>
+              </div>
+            ) : (
+              posts.length > 0 && (
+                <p className="allCaughtUp">You're all caught up.</p>
+              )
+            )}
+          </>
+        )}
       </div>
     </div>
   );

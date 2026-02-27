@@ -1,9 +1,21 @@
 
-.profileHeader{
-    /* position: relative; */
-    border-bottom: 1px solid #00547B;
+.profilePageWrapper{
     display: flex;
     flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.profileHeader{
+    /* position: relative; */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    
 }
 
 .PCBannerContainer{
@@ -11,7 +23,6 @@
     height: 20vh;
     width: 100%;
 
-;
 
 }
 
@@ -28,8 +39,6 @@
     padding: 20px;
 }
 
-.PCInfoName{
-}
 
 .profileName{
     font-size: 1.1rem;
@@ -37,16 +46,24 @@
 
 .profileUsername{
     font-size: 0.9rem;
-    color: rgb(168, 168, 168);
+    color: var(--text-secondary);
 }
+
+.PCInfoName{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 
 .PCInfoBio{
     margin-top: 20px;
 }
 
+
 .PCInfoOther{
     margin-top: 30px;
-    color: rgb(168, 168, 168);
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
@@ -69,24 +86,26 @@
 .FcountContainer{
     display: flex;
     gap: 10px;
+    cursor: pointer;
 }
 
 .Fcount{
-    color: white
+    color: var(--text-primary);
+    cursor: pointer;
 }
 
 .followDialog{
-    position: absolute;
-    left: 50vw;
-    top: 50vh;
-    transform: translateX(50%);
-    transform: translateY(-50%);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
-    width: auto;
+    width: 30vw;
     height: auto;
 
-    border: 2px solid #00547B;
-    background-color: rgb(0, 19, 33);
+    border: 1px solid #00547B;
+    border-radius: 10px;
+    background-color: var(--bg-primary);
     padding: 10px;
 }
 
@@ -111,27 +130,59 @@
     height: 120px;
     width: 120px;
     border-radius: 50%;
-    border: 4px solid rgb(0, 19, 33);
+    border: 4px solid var(--bg-secondary);
     image-rendering: smooth;
 
 }
 
 
 .followBtn{
-    height: 25px; 
+    height: 25px;
     width: auto;
-    background-color: #00547B;
+    background-color: var(--bg-btn);
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 
 .profileEditBtn{
-
-    height: 25px; 
+    height: 25px;
     width: auto;
-    background-color: #00547B;
+    background-color: var(--bg-btn);
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
 
+.mainContent {
+    box-shadow: 0px 15px 15px -12px #d6d6d638;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1023px) {
+    .followDialog {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 767px) {
+    .profilePageWrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .followDialog {
+        width: 90vw;
+    }
+
+    .PCprofilePic {
+        height: 80px;
+        width: 80px;
+    }
+
+    .PCBannerContainer {
+        height: 14vh;
+    }
 }

@@ -2,11 +2,14 @@
 
 .feedItemWrapper{
     display: flex;
+    flex-direction: column;
     min-height: 10vh;
     gap: 20px;
-    border-top: 1px solid #00547B;
-    border-bottom: 1px solid #00547B;
+    border: none;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
     padding: 10px;
+    box-shadow: 0px 15px 15px -12px #d6d6d638;
 }
 
 
@@ -16,31 +19,53 @@
     width: 50px;
     object-fit: cover;
     image-rendering: smooth;
+    cursor: pointer;
+
+    
+}
+
+.FIcontentHeader{
+    display: flex;
+    gap: 20px;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+
+    /* border: 1px solid red; */
+
+
 }
 
 
-.FIcontentHeader{
+.FIUserInfo{
     display: flex;
     gap: 10px;
     font-size: 0.95rem;
     margin-bottom: 5px;
+
+
 }
 
 
-.FIusername{
-    color: rgb(168, 168, 168);
+.FIname{
+    cursor: pointer;
+}
 
+.FIusername{
+    color: var(--text-secondary);
+    cursor: pointer;
 }
 
 .FIiconsWrapper{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 40px;
     margin-top: 15px;
 }
 
 .FIicon{
     height: 25px;
     width: 25px;
+    cursor: pointer;
 }
 
 
@@ -54,10 +79,27 @@
     border-radius: 50%;
     height: 25px;
     width: 25px;
+    cursor: pointer;
 }
 
 .postImage {
     height: auto;
     width: 30vw;
+}
 
+/* ── Responsive ── */
+
+@media (max-width: 767px) {
+    .feedItemWrapper {
+        gap: 10px;
+    }
+
+    .postImage {
+        width: 100%;
+    }
+
+    .FIprofilePic {
+        height: 38px;
+        width: 38px;
+    }
 }

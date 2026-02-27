@@ -5,29 +5,38 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: 
-    linear-gradient(#3F3051,#281F33) padding-box,
-    linear-gradient(to top, #3F3051 30%, #281F33 100%) border-box;
-    background-image: 
-    url("src/assets/background.jpg");
-    background-size: 100% 100%;
+    box-shadow: 0px 15px 15px -12px #d6d6d638;
+}
 
+.bg {
+  opacity: 0.4;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 
-.formWrapper{
+.LformWrapper{
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: 
-    linear-gradient(#00547B,rgb(0, 19, 33)) padding-box,
-    linear-gradient(to top, #3F3051 30%, #281F33 100%) border-box;
+    background-color: var(--bg-primary);
     padding: 2%;
     width: 30vw;
-
-
     border-radius: 10px;
 
+}
+
+.Lheader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
 }
 
 .loginForm{
@@ -38,7 +47,8 @@
 }
 
 .loginInput{    
-    background-color: rgb(0, 19, 33);
+    background-color: var(--bg-input);
+    color: var(--text-primary);
     border: none;
     height: 30px;
     border-radius: 10px;
@@ -49,6 +59,25 @@
     margin-top: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #00547B;;
+    background-color: var(--bg-btn);
     height: 3vh;
+}
+
+.Link{
+    color: #22C3E6;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1023px) {
+    .LformWrapper {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 767px) {
+    .LformWrapper {
+        width: 90vw;
+        padding: 5%;
+    }
 }

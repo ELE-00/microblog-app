@@ -4,6 +4,7 @@ import '../styles/login.css'
 import {login as loginAPI} from '../api/auth';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
+import background from '../assets/background.jpg';
 
 const Login = () => {
 
@@ -50,9 +51,15 @@ const Login = () => {
     return(
         <div className="loginWrapper">
 
-            <div className="formWrapper">
-            <h2>Welcome to Whispr</h2>
-            <h3>Please login</h3>
+            <img className="bg" src={background} alt="" />
+
+            <div className="LformWrapper">
+            <div className="Lheader">
+                <h1>WHISPR</h1>
+                <p>Login</p>
+            </div>
+
+
             
             <form className="loginForm" onSubmit={handlelogin}>
                 <label className="loginLabel" for="username">Username:</label>

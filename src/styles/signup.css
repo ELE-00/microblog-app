@@ -1,48 +1,33 @@
 
-
 .signupWrapper{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: 
-    linear-gradient(#3F3051,#281F33) padding-box,
-    linear-gradient(to top, #3F3051 30%, #281F33 100%) border-box;
-    background-image: 
-    url("src/assets/background.jpg");
-    background-size: 100% 100%;
-
 }
 
 
 .formWrapper{
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: 
-    linear-gradient(#00547B,rgb(0, 19, 33)) padding-box,
-    linear-gradient(to top, #3F3051 30%, #281F33 100%) border-box;
+    background-color: var(--bg-primary);
     padding: 2%;
     width: 30vw;
     border-radius: 10px;
-    border: 1px solid #00547B;;
-    box-shadow: 0px 0px 15px 2px #00547B;;
-
 }
-
 
 
 .signupForm{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
-
-
 }
 
-.signupInput{    
-    background-color: rgb(0, 19, 33);
+.signupInput{
+    background-color: var(--bg-input);
+    color: var(--text-primary);
     border: none;
     height: 30px;
     border-radius: 10px;
@@ -53,6 +38,67 @@
     margin-top: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #00547B;;
+    background-color: var(--bg-btn);
     height: 3vh;
+    cursor: pointer;
+}
+
+/* Password strength meter */
+.strengthMeter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.strengthBar {
+    display: flex;
+    gap: 4px;
+}
+
+.strengthSegment {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    transition: background-color 0.3s;
+}
+
+.strengthLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.requirementsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.requirementsList li {
+    font-size: 0.75rem;
+}
+
+.reqMet {
+    color: #2ecc71;
+}
+
+.reqUnmet {
+    color: var(--text-secondary);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1023px) {
+    .formWrapper {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 767px) {
+    .formWrapper {
+        width: 90vw;
+        padding: 5%;
+    }
 }

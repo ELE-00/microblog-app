@@ -71,8 +71,8 @@ export const createPost = async (postData) => {
     return axiosClient.post("/api/posts", postData, config);
 };
 
-export const getPosts = async () => {
-    return axiosClient.get("/api/posts");
+export const getPosts = async (page = 1) => {
+    return axiosClient.get("/api/posts", { params: { page, limit: 10 } });
 };
 
 export const deletePostById = async (postId) => {

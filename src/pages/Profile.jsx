@@ -26,6 +26,8 @@ const Profile = () => {
     const [editProfileDialog, setEditProfileDialog] = useState(false)
     const [otherUserProfile, setOtherUserProfile] = useState(null);
     const [otherUserPosts, setOtherUserPosts] = useState([]);
+    const [profileLoading, setProfileLoading] = useState(false);
+    const [profileError, setProfileError] = useState(null);
 
     const { id } = useParams();
     const isMe = Number(id) === user?.id;
@@ -36,6 +38,9 @@ const Profile = () => {
     useEffect(() => {
         if (isMe) return;
 
+        setProfileLoading(true);
+        setProfileError(null);
+
         const fetchOtherUser = async () => {
             try {
                 const res = await getUserData(id);
@@ -45,6 +50,9 @@ const Profile = () => {
                 setOtherUserPosts(res.data.posts || []);
             } catch (err) {
                 console.error(err);
+                setProfileError("Failed to load profile.");
+            } finally {
+                setProfileLoading(false);
             }
         };
 
@@ -73,10 +81,9 @@ const Profile = () => {
 
     async function handleDeletePost(postId) {
         try{
-            const res = await deletePostById(postId);
+            await deletePostById(postId);
             updatePosts({ delete: true, id: postId });
         } catch (err) {
-            console.log(err)
         }
     }
 
@@ -101,33 +108,27 @@ const Profile = () => {
     async function handleRemoveFollower(userId) {
         try{
             await removeFollower(userId);
-            setActionStatus(true)
+            setActionStatus(prev => !prev);
 
         }catch(err) {
-            console.log(err)
         }
     }
 
     //Handle follow user
     async function handleFollow(profileId) {
     try {
-        const res = await followUser(profileId);
+        await followUser(profileId);
         setActionStatus(prev => !prev); // trigger refetch
-        console.log("FOLLOW RESPONSE:", res);
     } catch (err) {
-        console.log(err);
     }
     }
 
     //Handle unfollow user
-
     async function handleUnfollow(profileId) {
     try {
-        const res = await unfollowUser(profileId);
+        await unfollowUser(profileId);
         setActionStatus(prev => !prev); // triggers refetch
-        console.error("FOLLOW ERROR:", err);
     } catch (err) {
-        console.log(err);
     }
     }
 
@@ -146,11 +147,10 @@ const Profile = () => {
         try {
         await UpdateProfileData(updatedProfileData)
             updateProfileData(updatedProfileData);
-        
+
         setEditProfileDialog(false);
 
         } catch (err) {
-            console.log(err)
         }
     }
 
@@ -167,12 +167,8 @@ const Profile = () => {
         
         try {
             const res = await uploadProfileImage(formDataImage)
-            console.log("Profile image uploaded:", res.data);
-
             updateProfilePic(res.data.profilePic)
-            
         } catch(err) {
-            console.log(err)
         }
 
     }
@@ -189,21 +185,21 @@ const Profile = () => {
         
         try {
             const res = await uploadBannerImage(formDataImage)
-            console.log("Banner image uploaded:", res.data);
-
             updateBannerPic(res.data.bannerPic)
-    
         } catch(err) {
-            console.log(err)
         }
 
     }
 
     return (
-        <div>
+        <div className="profilePageWrapper">
             
             <div className="mainContent">
-                {profile && (
+                {!isMe && profileLoading ? (
+                    <div className="spinnerWrapper"><div className="spinner" /></div>
+                ) : !isMe && profileError ? (
+                    <div className="errorState"><p>{profileError}</p></div>
+                ) : profile ? (
                     <ProfileCard
                         profile={profile}
                         followers={followers}
@@ -211,13 +207,12 @@ const Profile = () => {
                         handleOpenEditProfile={isMe ? handleOpenEditProfile : undefined}
                         handleFollow={!isMe ? handleFollow : undefined}
                         handleUnfollow={!isMe ? handleUnfollow : undefined}
-                        actionStatus={actionStatus} 
-                        handleOpenFollowers={isMe ? handleOpenFollowers: undefined}       
-                        handleOpenFollowing={isMe ? handleOpenFollowing: undefined}   
+                        actionStatus={actionStatus}
+                        handleOpenFollowers={isMe ? handleOpenFollowers: undefined}
+                        handleOpenFollowing={isMe ? handleOpenFollowing: undefined}
                     />
-                )}
+                ) : null}
             </div>
-
 
             <div className="mainContent">
                 {posts?.map(post => (

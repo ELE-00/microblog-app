@@ -37,24 +37,36 @@ input[type="number"]:focus {
 }
 
 :root {
-  font-family: Roboto, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #ffffff;
+  --bg-body:    #000000;
+  --bg-primary: #131519;
+  --bg-secondary: rgb(0, 19, 33);
+  --bg-input:   #d6d6d616;
+  --text-primary: aliceblue;
+  --text-secondary: rgb(168, 168, 168);
+  --bg-btn: #22C3E6;
 
 }
 
+body.light-mode {
+  --bg-body:    #e5e5e5;
+  --bg-primary: #ffffff;
+  --bg-secondary: #e8eaed;
+  --bg-input:   #d8dce2;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --bg-btn: #22C3E6;
+}
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: rgb(0, 19, 33);
-  color: aliceblue;
-
+  background-color: var(--bg-body);
+  color: var(--text-primary);
 }
 
 h1 {

@@ -2,13 +2,14 @@
     display: flex;
     min-height: 8vh;
     border: 1px solid #00547B;
-    background-color: rgb(0, 26, 44);
+    background-color: var(--bg-primary);
 }
 
 
 .commentFormInput{
     width: 100%;
-    background-color: rgb(0, 26, 44);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     border: none;
     padding: 10px;
 }
@@ -17,7 +18,7 @@
 .commentFormBtn{
     background-color: #00547B;
     border: none;
-    
+    cursor: pointer;
 }
 
 .commentsHeading{

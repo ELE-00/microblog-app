@@ -47,7 +47,7 @@ function UserList() {
 
 
     return (
-        <div>
+        <div className="userListWrapper">
 
             <div className="searchBarContainer">
                 <form>

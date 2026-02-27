@@ -32,9 +32,8 @@ const FeedItem = ( {item, handleDeletePost} ) => {
                 const res = await postLiked(item.id)
                 setLiked(!!res.data);
             }catch (err) {
-                console.log(err);
             }
-  
+
         }
         fetchData();
     }, [])
@@ -70,34 +69,10 @@ const FeedItem = ( {item, handleDeletePost} ) => {
 
 
 
-    async function handlePostImgUpload(e) {
-        const file = e.target.files[0];
-
-        if(!file) return
-
-            const formDataImage = new FormData();
-            formDataImage.append("bannerpic", file); 
-
-        
-        try {
-            const res = await uploadBannerImage(formDataImage)
-            console.log("Banner image uploaded:", res.data);
-
-            updateBannerPic(res.data.bannerPic)
-    
-        } catch(err) {
-            console.log(err)
-        }
-
-    }       
-
-
-    // console.log(item)
-
     return (
         <div className="feedItemWrapper">
             
-            <div>
+            <div className="FIcontentHeader">
 
             <img
                 className="FIprofilePic"
@@ -106,14 +81,15 @@ const FeedItem = ( {item, handleDeletePost} ) => {
                 onClick={goToProfile}
             />
 
+            <div className="FIUserInfo">
+                <p className="FIname" onClick={goToProfile}> {item.author.profile.name} </p>
+                <p className="FIusername" onClick={goToProfile}> @{item.author.username} </p>
+                <div className="FIusername"> • {timeString} </div> 
+            </div>
+
             </div>
 
             <div className="FIcontent">
-                <div className="FIcontentHeader">
-                    <p className="FIname" onClick={goToProfile}> {item.author.profile.name} </p>
-                    <p className="FIusername" onClick={goToProfile}> @{item.author.username} </p>
-                    <div className="FIusername"> • {timeString} </div> 
-                </div>
 
                 <div> 
                     <p> {item.content} </p> 

@@ -17,111 +17,97 @@ const PostDetails = () => {
     const navigate = useNavigate();
 
     const { id } = useParams();
-    const [post, setPost] = useState(null)
-    const [comments, setComments] = useState([])
-    const [formData, setFormData] = useState({content: ""})
+    const [post, setPost] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [formData, setFormData] = useState({content: ""});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (!id) return;
 
-        const fetchData = async () => {
-            console.log("received id: ", id)
-            try{
-                const res = await getPostById(id)
-                setPost(res.data)
-            }catch (err) {
-                console.log("Failed to get post")
-            }
-        }
-        fetchData();
-    }, [id])
+        setLoading(true);
+        setError(null);
+
+        getPostById(id)
+            .then((res) => setPost(res.data))
+            .catch(() => setError("Failed to load post."))
+            .finally(() => setLoading(false));
+    }, [id]);
 
 
     useEffect(() => {
         if (!id) return;
 
-        const fetchData = async () => {
-            console.log("received id: ", id)
-            try{
-                const res = await getComments(id)
-                setComments(res.data)
-            }catch (err) {
-                console.log("Failed to get post")
-            }
-        }
-        fetchData();
-    }, [])
+        getComments(id)
+            .then((res) => setComments(res.data))
+            .catch((err) => console.log("Failed to get comments", err));
+    }, []);
 
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
-    }
+        setFormData({...formData, [e.target.name]: e.target.value});
+    };
 
 
     const handleCreateComment = async (e) => {
         e.preventDefault();
 
-        try{
-            const res = await createComment(id, formData)
+        try {
+            const res = await createComment(id, formData);
             setComments(prev => [res.data, ...prev]);
             setFormData({ content: "" });
-
         } catch(err) {
-            console.log(err)
+            console.log(err);
         }
-    }
-    
+    };
+
 
     async function handleDeleteComment(commentId) {
         try {
-            const res = await deleteComment(commentId)
+            await deleteComment(commentId);
             setComments(prev => prev.filter(comment => comment.id !== commentId));
-
-        }catch (err) {
-            console.log(err)
+        } catch (err) {
+            console.log(err);
         }
-
     }
 
 
     async function handleDeletePost(postId) {
-        try{
-            const res = await deletePostById(postId);
-            navigate("/")
+        try {
+            await deletePostById(postId);
+            navigate("/");
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-
-
     }
-
 
 
 return (
     <div>
         <div className="postContent">
-
-            {post? (
-              <FeedItem key={post.id} item={post} handleDeletePost={handleDeletePost}/>  
-            ): (
-                <p> Loading... </p>
-            )}
-         </div>
+            {loading ? (
+                <div className="spinnerWrapper"><div className="spinner" /></div>
+            ) : error ? (
+                <div className="errorState"><p>{error}</p></div>
+            ) : post ? (
+                <FeedItem key={post.id} item={post} handleDeletePost={handleDeletePost} />
+            ) : null}
+        </div>
 
         <div className="commentFormWrapper">
-            <form className="commentForm" >
-                <input className="commentFormInput" type="text" placeholder="Add a comment" name="content" value={formData.content} onChange={handleChange}></input>
+            <form className="commentForm">
+                <input className="commentFormInput" type="text" placeholder="Add a comment" name="content" value={formData.content} onChange={handleChange} />
                 <button className="commentFormBtn" type="submit" onClick={handleCreateComment}>Send</button>
             </form>
         </div>
 
-         <div className="postContent">
+        <div className="postContent">
             <p className="commentsHeading">Comments</p>
             {comments.map(c => (
-                <Comments key={c.id} item={c} handleDeleteComment={handleDeleteComment}/>
-            )             
-            )}
-         </div>
+                <Comments key={c.id} item={c} handleDeleteComment={handleDeleteComment} />
+            ))}
+        </div>
     </div>
 );
 

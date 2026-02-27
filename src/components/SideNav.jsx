@@ -9,38 +9,50 @@ import logoutIcon from '../assets/logouticon.png';
 
 import { useAuth } from '../context/AuthContext.jsx';
 import profilePic from '../assets/profilepic.jpg';
+import lightModeIcon from '../assets/lightMode.png';
+import darkModeIcon from '../assets/darkMode.png';
 import { getProfileData } from '../api/auth.js';
 import { Link } from 'react-router-dom';
 
 function SideNav() {
 
     const { user, currentUserProfile, logout } = useAuth();
+
+    const [lightMode, setLightMode] = useState(false);
+
+    useEffect(() => {
+        if (lightMode) {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+    }, [lightMode]);
+
+    const handleUILightModeON = () => {
+        setLightMode(prev => !prev);
+    }
  
     return (
         <div className="sideNavWrapper">
             <div className="sideNavLinks">
-                <div className="linkContainer"> 
-                    <img className="linkIcon"  src={homeIcon} alt="homeicon.png"></img>
-                    <a className="linkText" href="/">Feed</a>
-                    </div>
+                <Link className="linkContainer" to="/">
+                    <img className="linkIcon" src={homeIcon} alt="homeicon.png" />
+                    <span className="linkText">Feed</span>
+                </Link>
 
-                <div className="linkContainer">
-                    <img className="linkIcon" src={profileIcon} alt="profileicon.png"></img>
+                <Link className="linkContainer" to={`/profile/${user.id}`}>
+                    <img className="linkIcon" src={profileIcon} alt="profileicon.png" />
+                    <span className="linkText">Profile</span>
+                </Link>
 
-                    <Link className="linkText" to={`/profile/${user.id}`}>Profile</Link>
+                <Link className="linkContainer" to="/AddUser">
+                    <img className="linkIcon" src={userListIcon} alt="userListIcon.png" />
+                    <span className="linkText">Add User</span>
+                </Link>
 
-                </div> 
-
-                <div className="linkContainer">
-                    <img className="linkIcon" src={userListIcon} alt="userListIcon.png"></img>
-
-                    <Link className="linkText" to={`/AddUser`}>Add User</Link>
-
-                </div> 
-
-                <div className="linkContainer">
-                    <img className="linkIcon" src={logoutIcon} alt="logoutIcon.png"></img>
-                    <p onClick={logout}>Logout</p>
+                <div className="linkContainer" onClick={logout}>
+                    <img className="linkIcon" src={logoutIcon} alt="logoutIcon.png" />
+                    <span className="linkText">Logout</span>
                 </div>
             </div>
 
@@ -61,6 +73,15 @@ function SideNav() {
                     <p className="SNusername">@{currentUserProfile?.username}</p>
                 </div>
 
+                <div className="UIMode">
+
+                    {lightMode
+                        ? <img className="linkIcon" src={darkModeIcon} alt="lightMode.png" onClick={handleUILightModeON}></img>
+                        : <img className="linkIcon" src={lightModeIcon} alt="darkMode.png" onClick={handleUILightModeON}></img>                
+                    }
+
+
+                </div>
 
             </div>
         </div>
