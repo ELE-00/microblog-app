@@ -4,7 +4,7 @@ import '../styles/profile.css'
 import { useAuth } from '../context/AuthContext.jsx';
 import { useParams } from 'react-router-dom';
 
-import ProfileCard from '../components/profileCard.jsx';
+import ProfileCard from '../components/ProfileCard.jsx';
 import FeedItem from '../components/FeedItem.jsx';
 import { getUserData } from '../api/auth.js';
 import { deletePostById } from '../api/auth.js';
