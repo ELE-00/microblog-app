@@ -62,7 +62,8 @@ const Signup = () => {
             navigate(`/login`);
 
         } catch (err) {
-            alert("Username already exists");
+            const msg = err?.response?.data?.error || err?.message || "Signup failed";
+            alert(msg);
             console.log(err);
         }
     };
