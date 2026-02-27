@@ -2,6 +2,10 @@
 
 Frontend for Whispr — a microblogging social platform. Built with React 19, Vite, and React Router.
 
+<img src=".\src\assets\appScreen.png" width="500" />
+
+[Live preview](https://microblog-app-zbjt.vercel.app/)
+
 ## Features
 
 - Login and signup with JWT authentication
