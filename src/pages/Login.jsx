@@ -55,7 +55,7 @@ const Login = () => {
 
             <div className="LformWrapper">
             <div className="Lheader">
-                <h1>WHISPR</h1>
+                <h1>PULSE</h1>
                 <p>Login</p>
             </div>
 
