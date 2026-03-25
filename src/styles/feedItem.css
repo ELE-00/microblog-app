@@ -83,7 +83,7 @@
 }
 
 .postImage {
-    width: 100%;
+    width: auto;
     max-height: 512px;
     object-fit: cover;
     border-radius: 12px;
