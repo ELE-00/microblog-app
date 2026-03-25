@@ -83,8 +83,12 @@
 }
 
 .postImage {
-    height: auto;
-    width: 30vw;
+    width: 100%;
+    max-height: 512px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 8px;
+    display: block;
 }
 
 /* ── Responsive ── */
@@ -95,7 +99,7 @@
     }
 
     .postImage {
-        width: 100%;
+        max-height: 300px;
     }
 
     .FIprofilePic {

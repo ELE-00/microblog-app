@@ -93,7 +93,7 @@ const FeedItem = ( {item, handleDeletePost} ) => {
 
                 <div> 
                     <p> {item.content} </p> 
-                    <img className="postImage" src={item?.image} />
+                    {item?.image && <img className="postImage" src={item.image} alt="post" />}
                 </div>
 
                 <div className="FIiconsWrapper">
