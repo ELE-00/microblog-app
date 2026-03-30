@@ -1,4 +1,4 @@
-# microblog-app
+# Whispr
 
 Frontend for Whispr — a microblogging social platform. Built with React 19, Vite, and React Router.
 
