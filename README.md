@@ -1,6 +1,6 @@
-# Whispr
+# PULSE
 
-Frontend for Whispr — a microblogging social platform. Built with React 19, Vite, and React Router.
+Frontend for Pulse — a microblogging social platform. Built with React 19, Vite, and React Router.
 
 <img src=".\src\assets\appScreen.png" width="500" />
 
